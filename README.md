@@ -10,8 +10,9 @@ Using a dedicated IAM user (`terraform-practice`, least-privilege, separate from
 - [`01-first-bucket.md`](notes/01-first-bucket.md) — one S3 bucket, created end-to-end ([`01-first-bucket/main.tf`](01-first-bucket/))
 - [`02-variables-and-outputs.md`](notes/02-variables-and-outputs.md) — a `variable` for the bucket name, an `output` for its ARN, and a real gotcha: an output added after the resource already exists still needs its own `apply` to get computed into state ([`02-variables-and-outputs/`](02-variables-and-outputs/))
 - [`03-iam-least-privilege.md`](notes/03-iam-least-privilege.md) — an IAM user + policy + attachment scoped to exactly one bucket, `jsonencode` for real IAM policy JSON, and a real `AccessDenied` wall (the practice IAM user needed its own scoped IAM permissions before it could create IAM resources) ([`03-iam-least-privilege/`](03-iam-least-privilege/))
+- [`04-dynamodb-table.md`](notes/04-dynamodb-table.md) — a DynamoDB table (`PAY_PER_REQUEST` billing, schema-less beyond its key), and a real `EntityAlreadyExists` wall: IAM names are unique per AWS account, not per Terraform project, so copying exercise 03's IAM names into a new project collided with the real resources already created ([`04-dynamodb-table/`](04-dynamodb-table/))
 
-More notes (a second resource type, remote state with locking, combining everything into one module) land here as exercises are completed.
+More notes (remote state with locking, combining everything into one module) land here as exercises are completed.
 
 ## What comes after this repo
 
