@@ -12,11 +12,12 @@ Using a dedicated IAM user (`terraform-practice`, least-privilege, separate from
 - [`03-iam-least-privilege.md`](notes/03-iam-least-privilege.md) — an IAM user + policy + attachment scoped to exactly one bucket, `jsonencode` for real IAM policy JSON, and a real `AccessDenied` wall (the practice IAM user needed its own scoped IAM permissions before it could create IAM resources) ([`03-iam-least-privilege/`](03-iam-least-privilege/))
 - [`04-dynamodb-table.md`](notes/04-dynamodb-table.md) — a DynamoDB table (`PAY_PER_REQUEST` billing, schema-less beyond its key), and a real `EntityAlreadyExists` wall: IAM names are unique per AWS account, not per Terraform project, so copying exercise 03's IAM names into a new project collided with the real resources already created ([`04-dynamodb-table/`](04-dynamodb-table/))
 - [`05-remote-state.md`](notes/05-remote-state.md) — moving state off my laptop into a shared S3 backend with native locking (`use_lockfile`, verified against the installed Terraform 1.16.6 before trusting it — no separate DynamoDB table needed since Terraform 1.10) ([`05-remote-state/`](05-remote-state/))
+- [`06-module.md`](notes/06-module.md) — the same bucket+IAM pattern from exercises 03/04 as one reusable module instead of copy-pasted code, and a real mix-up between a module's own output and the root's output for that module ([`06-module/`](06-module/))
 
-More notes (combining everything into one module) land here as exercises are completed.
+This closes the core exercise set (01–06).
 
 **Note on cleanup:** exercises 01–04's resources have been `destroy`ed after being documented — nothing from them is still running on AWS. The `05-remote-state/bootstrap` bucket is intentionally kept, since `05-remote-state/app`'s state lives inside it.
 
 ## What comes after this repo
 
-Once the core exercises are done, the next real step is applying Terraform to infrastructure that already exists: importing [Nik-Blog](https://github.com/NikanEidi/nik-blog)'s manually-created S3 bucket and IAM user under Terraform with `terraform import`, instead of destroying and recreating them — the realistic version of adopting IaC on an existing project.
+The next real step is applying Terraform to infrastructure that already exists: importing [Nik-Blog](https://github.com/NikanEidi/nik-blog)'s manually-created S3 bucket and IAM user under Terraform with `terraform import`, instead of destroying and recreating them — the realistic version of adopting IaC on an existing project.
