@@ -9,8 +9,9 @@ Using a dedicated IAM user (`terraform-practice`, least-privilege, separate from
 - [`00-what-is-terraform.md`](notes/00-what-is-terraform.md) — what Terraform/IaC is, the core building blocks, the three-command workflow, `.tf` vs `.terraform.lock.hcl` vs `.tfstate`, `id` vs `arn`
 - [`01-first-bucket.md`](notes/01-first-bucket.md) — one S3 bucket, created end-to-end ([`01-first-bucket/main.tf`](01-first-bucket/))
 - [`02-variables-and-outputs.md`](notes/02-variables-and-outputs.md) — a `variable` for the bucket name, an `output` for its ARN, and a real gotcha: an output added after the resource already exists still needs its own `apply` to get computed into state ([`02-variables-and-outputs/`](02-variables-and-outputs/))
+- [`03-iam-least-privilege.md`](notes/03-iam-least-privilege.md) — an IAM user + policy + attachment scoped to exactly one bucket, `jsonencode` for real IAM policy JSON, and a real `AccessDenied` wall (the practice IAM user needed its own scoped IAM permissions before it could create IAM resources) ([`03-iam-least-privilege/`](03-iam-least-privilege/))
 
-More notes (a least-privilege IAM role scoped to one bucket, a second resource type, remote state with locking, combining everything into one module) land here as exercises are completed.
+More notes (a second resource type, remote state with locking, combining everything into one module) land here as exercises are completed.
 
 ## What comes after this repo
 
